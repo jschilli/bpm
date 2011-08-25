@@ -16,10 +16,12 @@ module BPM
     end
 
     def settings
+      $stderr.puts("pc:settings:#{@generating_asset ? @generating_asset.settings : {}}")
       @generating_asset ? @generating_asset.build_settings : {}
     end
 
     def as_json
+      $stderr.puts("pc:as_json:settings:#{settings}")
       { :package => @package,
         :moduleId => @moduleId,
         :settings => settings }

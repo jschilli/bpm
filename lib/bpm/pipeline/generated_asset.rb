@@ -25,6 +25,7 @@ module BPM
 
     def build_settings
       ret = environment.project.build_settings[asset_name]
+      $stderr.puts("ga:build_settings:#{ret}");
       (ret && ret['bpm:settings']) || {}
     end
 
@@ -43,9 +44,9 @@ module BPM
           raise MinifierNotFoundError.new(minifier_name)
         end
         plugin_ctx = environment.plugin_js_for minifier_plugin_name
-
         plugin_ctx += <<-end_eval
           ; // Safety
+          CTX = #{BPM::PluginContext.new(pkg).to_json};
           CTX.minify = function(body) { return BPM_PLUGIN.minify(body); };
         end_eval
 

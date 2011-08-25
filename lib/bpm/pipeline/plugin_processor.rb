@@ -37,7 +37,7 @@ module BPM
 
       plugin_context = BPM::PluginContext.new(pkg, module_id);
       minifier_js = plugin_context.minify_as_js;
-
+$stderr.puts("minifier_js #{minifier_js} #{plugin_context.settings}")
       # CTX.additionalContext is the minifier's execution environment
       plugin_ctx += <<-end_eval
           ; // Safety
